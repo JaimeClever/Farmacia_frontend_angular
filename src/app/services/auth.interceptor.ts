@@ -16,8 +16,15 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authService.getToken();
 
-    // No agregar token al endpoint de login
-    if (token && !req.url.endsWith('/api/auth/login')) {
+    const excludedUrls = [
+      '/api/auth/login',
+      '/api/auth/register',
+      '/api/usuarios/admin' // 🔴 Excluir esta ruta del token
+    ];
+
+    const shouldExclude = excludedUrls.some(url => req.url.includes(url));
+
+    if (token && !shouldExclude) {
       const authReq = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${token}`)
       });
@@ -26,5 +33,4 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(req);
   }
-
 }
