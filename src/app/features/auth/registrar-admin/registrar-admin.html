@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center align-items-center min-vh-100 py-4">
+  <mat-card class="registro-box shadow-lg rounded-3">
+    <h2 class="text-center mb-4">Registrar Administrador</h2>
+
+    <form (ngSubmit)="registrar()">
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Nombres</mat-label>
+        <input matInput [(ngModel)]="dto.nombres" name="nombres" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-100 mb-3">
+        <mat-label>Usuario</mat-label>
+        <input matInput [(ngModel)]="dto.username" name="username" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="w-100 mb-4">
+        <mat-label>Contraseña</mat-label>
+        <input matInput [(ngModel)]="dto.password" type="password" name="password" required />
+      </mat-form-field>
+
+      <div class="error-message text-danger mb-3" *ngIf="error">
+        <p class="m-0">{{ error }}</p>
+      </div>
+
+      <button mat-raised-button color="primary" class="w-100" type="submit">
+        Registrar
+      </button>
+    </form>
+  </mat-card>
+</div>

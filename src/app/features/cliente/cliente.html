@@ -1,0 +1,105 @@
+<div class="container my-4">
+  <h2 class="text-center text-primary mb-4">Gestión de Clientes</h2>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+      <h3 class="card-title mb-0">{{ editandoCliente ? 'Editar Cliente' : 'Registrar Nuevo Cliente' }}</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="clienteForm" (ngSubmit)="guardarCliente()">
+        <input type="hidden" formControlName="id">
+        <div class="mb-3">
+          <label for="nombres" class="form-label">Nombres:</label>
+          <input
+            type="text"
+            id="nombres"
+            formControlName="nombres"
+            class="form-control"
+            [class.is-invalid]="clienteForm.get('nombres')?.invalid && clienteForm.get('nombres')?.touched"
+          >
+          <div class="invalid-feedback" *ngIf="clienteForm.get('nombres')?.invalid && clienteForm.get('nombres')?.touched">
+            El nombre es obligatorio.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="correo" class="form-label">Correo:</label>
+          <input
+            type="email"
+            id="correo"
+            formControlName="correo"
+            class="form-control"
+            [class.is-invalid]="clienteForm.get('correo')?.invalid && clienteForm.get('correo')?.touched"
+          >
+          <div class="invalid-feedback" *ngIf="clienteForm.get('correo')?.invalid && clienteForm.get('correo')?.touched">
+            <span *ngIf="clienteForm.get('correo')?.errors?.['required']">El correo es obligatorio.</span>
+            <span *ngIf="clienteForm.get('correo')?.errors?.['email']">Ingrese un correo válido.</span>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="dni" class="form-label">DNI:</label>
+          <input
+            type="text"
+            id="dni"
+            formControlName="dni"
+            class="form-control"
+            [class.is-invalid]="clienteForm.get('dni')?.invalid && clienteForm.get('dni')?.touched"
+          >
+          <div class="invalid-feedback" *ngIf="clienteForm.get('dni')?.invalid && clienteForm.get('dni')?.touched">
+            <span *ngIf="clienteForm.get('dni')?.errors?.['required']">El DNI es obligatorio.</span>
+            <span *ngIf="clienteForm.get('dni')?.errors?.['pattern']">El DNI debe tener 8 dígitos.</span>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-success me-2">
+            <i class="bi bi-save"></i> {{ editandoCliente ? 'Actualizar' : 'Guardar' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="limpiarFormulario()">
+            <i class="bi bi-x-circle"></i> Limpiar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <hr class="my-4">
+
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h3 class="card-title mb-0">Listado de Clientes</h3>
+    </div>
+    <div class="card-body">
+      <div *ngIf="clientes.length === 0" class="text-center text-muted">
+        No hay clientes registrados.
+      </div>
+      <div class="table-responsive" *ngIf="clientes.length > 0">
+        <table class="table table-striped table-hover">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombres</th>
+            <th>Correo</th>
+            <th>DNI</th>
+            <th>Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let cliente of clientes">
+            <td>{{ cliente.id }}</td>
+            <td>{{ cliente.nombres }}</td>
+            <td>{{ cliente.correo }}</td>
+            <td>{{ cliente.dni }}</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-2" (click)="editarCliente(cliente)">
+                <i class="bi bi-pencil"></i> Editar
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="eliminarCliente(cliente.id!)">
+                <i class="bi bi-trash"></i> Eliminar
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

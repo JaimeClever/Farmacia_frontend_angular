@@ -1,0 +1,132 @@
+/* src/app/features/ventas/ventas.component.scss */
+.form-check-label {
+  margin-left: 0.5rem;
+}
+
+.table-responsive {
+  margin-top: 1rem;
+}
+
+.collapse-details-btn {
+  font-size: 0.85rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.alert {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.table thead th {
+  background-color: #007bff;
+  color: white;
+  vertical-align: middle;
+}
+.table tbody tr:hover {
+  background-color: #f2f2f2;
+}
+
+.form-select.is-invalid,
+.form-control.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.invalid-feedback {
+  display: block;
+  font-size: 0.875em; // Standardize font size
+  margin-top: 0.25rem;
+}
+
+/* --- Product Grid Styles --- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Responsive grid */
+  gap: 1rem; /* Spacing between cards */
+}
+
+.product-card {
+  width: 100%; /* Ensure cards take full width of their grid column */
+  border: 1px solid #e0e0e0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.card-img-top-container {
+  width: 100%;
+  height: 120px; /* Fixed height for image container */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fa; /* Light background for consistency */
+  border-bottom: 1px solid #eee;
+}
+
+.product-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Ensure the image fits without cropping or distorting */
+}
+
+.no-image-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #ccc;
+  font-size: 0.9rem;
+  .bi-image {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.product-card .card-body {
+  flex-grow: 1; /* Allow card body to expand */
+  padding: 0.75rem;
+  text-align: center;
+}
+
+.product-card .card-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  height: 2.5rem; /* Fixed height for title to prevent layout shifts */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  -webkit-box-orient: vertical;
+}
+
+.product-card .card-text {
+  font-size: 0.875rem;
+}
+
+.product-card .btn {
+  width: 100%;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
+}

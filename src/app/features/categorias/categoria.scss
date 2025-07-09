@@ -1,0 +1,95 @@
+/* src/app/features/categoria/categorias.component.scss */
+
+/* Basic styling for the component container */
+.container {
+  padding: 20px;
+  background-color: #f8f9fa; /* Light grey background */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card styling */
+.card {
+  border: none;
+  border-radius: 8px;
+  overflow: hidden; /* Ensures header corners are rounded */
+}
+
+.card-header {
+  background-color: #007bff; /* Primary blue for headers */
+  color: white;
+  font-weight: bold;
+  padding: 15px 20px;
+  border-bottom: none; /* Remove default border */
+}
+
+/* Form specific styling */
+.form-label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.form-control {
+  border-radius: 5px;
+}
+
+.form-control.is-invalid {
+  border-color: #dc3545; /* Red border for invalid fields */
+}
+
+.invalid-feedback {
+  color: #dc3545;
+  font-size: 0.875em;
+  margin-top: 5px;
+}
+
+/* Table specific styling */
+.table {
+  margin-bottom: 0; /* Remove bottom margin if inside card-body */
+}
+
+.table th {
+  background-color: #e9ecef; /* Slightly darker header for table */
+  font-weight: 600;
+  color: #495057;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+/* Button styling for actions */
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.2rem;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #212529; /* Darker text for contrast */
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: white;
+}
+
+/* Horizontal rule styling */
+hr {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}

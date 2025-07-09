@@ -1,0 +1,34 @@
+/* Use your color variables if you have them defined globally or locally */
+/* Example:
+@use "sass:color";
+$primary-color: #007bff;
+$background-color: #f8f9fa;
+$text-color: #343a40;
+*/
+
+:host {
+  display: block;
+  background-color: #f8f9fa; /* General page background */
+  font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #343a40; /* Main text color */
+}
+
+/* Custom styles complementing Bootstrap, if needed */
+/* For instance, if you want specific font weights or slight adjustments */
+h2 {
+  font-weight: 600;
+}
+
+h3 {
+  font-size: 1.5em; /* Adjust card title size if default isn't preferred */
+}
+
+/* Add subtle shadow to list item buttons if btn-outline doesn't provide enough visual depth */
+.list-group-item .btn {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Ensure icons are spaced correctly if not handled by Bootstrap's me-2 etc. */
+.btn i {
+  margin-right: 0.25rem;
+}

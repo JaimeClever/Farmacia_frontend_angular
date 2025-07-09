@@ -1,0 +1,183 @@
+<div class="container my-4">
+  <h2 class="text-center text-primary mb-4">Gestión de Productos</h2>
+
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white">
+      <h3 class="card-title mb-0">{{ editandoProducto ? 'Editar Producto' : 'Registrar Nuevo Producto' }}</h3>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="productoForm" (ngSubmit)="guardarProducto()">
+        <input type="hidden" formControlName="id">
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="nombre" class="form-label">Nombre del Producto:</label>
+            <input type="text" id="nombre" formControlName="nombre" class="form-control"
+                   [class.is-invalid]="productoForm.get('nombre')?.invalid && productoForm.get('nombre')?.touched">
+            <div class="invalid-feedback" *ngIf="productoForm.get('nombre')?.invalid && productoForm.get('nombre')?.touched">
+              El nombre es obligatorio.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="precio" class="form-label">Precio:</label>
+            <input type="number" id="precio" formControlName="precio" class="form-control" step="0.01"
+                   [class.is-invalid]="productoForm.get('precio')?.invalid && productoForm.get('precio')?.touched">
+            <div class="invalid-feedback" *ngIf="productoForm.get('precio')?.invalid && productoForm.get('precio')?.touched">
+              El precio es obligatorio y debe ser mayor que 0.
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="stock" class="form-label">Stock:</label>
+            <input type="number" id="stock" formControlName="stock" class="form-control"
+                   [class.is-invalid]="productoForm.get('stock')?.invalid && productoForm.get('stock')?.touched">
+            <div class="invalid-feedback" *ngIf="productoForm.get('stock')?.invalid && productoForm.get('stock')?.touched">
+              El stock es obligatorio y debe ser un número no negativo.
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="categoriaId" class="form-label">Categoría:</label>
+            <select id="categoriaId" formControlName="categoriaId" class="form-select">
+              <option [ngValue]="null">-- Seleccione una Categoría --</option>
+              <option *ngFor="let categoria of categorias" [ngValue]="categoria.id">
+                {{ categoria.nombre }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="descripcion" class="form-label">Descripción:</label>
+          <textarea id="descripcion" formControlName="descripcion" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label for="imagenInput" class="form-label">Imagen del Producto:</label>
+          <input
+            type="file"
+            id="imagenInput"
+            class="form-control"
+            (change)="onFileSelected($event)"
+            accept="image/*"
+          >
+          <div *ngIf="imagenPrevisualizacion" class="mt-2">
+            <img [src]="imagenPrevisualizacion" alt="Previsualización de imagen" style="max-width: 200px; max-height: 200px; border: 1px solid #ddd; padding: 5px;">
+          </div>
+          <div *ngIf="productoForm.get('imagenBase64')?.value && !imagenPrevisualizacion && editandoProducto?.imagenBase64" class="mt-2">
+            <small class="text-muted">Imagen existente cargada.</small>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="codigoBarra" class="form-label">Código de Barra:</label>
+            <input type="text" id="codigoBarra" formControlName="codigoBarra" class="form-control">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="fechaVencimiento" class="form-label">Fecha de Vencimiento:</label>
+            <input type="date" id="fechaVencimiento" formControlName="fechaVencimiento" class="form-control">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="lote" class="form-label">Lote:</label>
+            <input type="text" id="lote" formControlName="lote" class="form-control">
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="fabricante" class="form-label">Fabricante:</label>
+            <input type="text" id="fabricante" formControlName="fabricante" class="form-control">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="presentacion" class="form-label">Presentación:</label>
+            <input type="text" id="presentacion" formControlName="presentacion" class="form-control">
+          </div>
+          <div class="col-md-6 mb-3 form-check d-flex align-items-end">
+            <div>
+              <input type="checkbox" id="requiereReceta" formControlName="requiereReceta" class="form-check-input">
+              <label for="requiereReceta" class="form-check-label ms-2">Requiere Receta Médica</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-4">
+          <button type="submit" class="btn btn-success me-2">
+            <i class="bi bi-save"></i> {{ editandoProducto ? 'Actualizar Producto' : 'Registrar Producto' }}
+          </button>
+          <button type="button" class="btn btn-secondary" (click)="limpiarFormulario()">
+            <i class="bi bi-x-circle"></i> {{ editandoProducto ? 'Cancelar Edición' : 'Limpiar Formulario' }}
+          </button>
+        </div>
+
+        <div *ngIf="mensajeEstado" class="mt-3 alert" [class.alert-success]="!isError" [class.alert-danger]="isError">
+          {{ mensajeEstado }}
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card shadow-sm">
+    <div class="card-header bg-info text-white">
+      <h3 class="card-title mb-0">Lista de Productos</h3>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Imagen</th> <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Categoría</th>
+            <th>Código Barra</th>
+            <th>Vencimiento</th>
+            <th>Receta</th>
+            <th>Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngIf="productos.length === 0">
+            <td colspan="10" class="text-center">No hay productos registrados.</td> </tr>
+          <tr *ngFor="let producto of productos">
+            <td>{{ producto.id }}</td>
+            <td>
+              <img
+                *ngIf="producto.imagenBase64"
+                [src]="sanitizer.bypassSecurityTrustUrl(producto.imagenBase64)"
+                alt="Producto"
+                style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;"
+              >
+              <span *ngIf="!producto.imagenBase64">N/A</span>
+            </td>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.precio | currency:'USD':'symbol':'1.2-2' }}</td>
+            <td>{{ producto.stock }}</td>
+            <td>{{ getCategoryName(producto.categoriaId) }}</td>
+            <td>{{ producto.codigoBarra || 'N/A' }}</td>
+            <td>{{ producto.fechaVencimiento || 'N/A' }}</td>
+            <td>
+              <span *ngIf="producto.requiereReceta" class="badge bg-danger">Sí</span>
+              <span *ngIf="!producto.requiereReceta" class="badge bg-success">No</span>
+            </td>
+            <td>
+              <button class="btn btn-warning btn-sm me-1" (click)="editarProducto(producto)">
+                <i class="bi bi-pencil"></i>
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="eliminarProducto(producto.id!)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

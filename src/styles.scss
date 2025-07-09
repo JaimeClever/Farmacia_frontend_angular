@@ -1,0 +1,59 @@
+/* You might already have some imports here */
+@import '@angular/material/prebuilt-themes/indigo-pink.css'; // Or your chosen Angular Material theme
+@import 'bootstrap/scss/bootstrap'; // If you're using Bootstrap
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  // Ensure Roboto font is consistently applied and available
+  font-family: 'Roboto', "Helvetica Neue", sans-serif;
+
+  // 🎨 Fondo celeste degradado
+  background: linear-gradient(135deg, #e0f7fa, #b3e5fc, #81d4fa); /* Light blues for pharmacy theme */
+  background-size: 400% 400%;
+  animation: fondoCeleste 20s ease infinite;
+  color: #1c1c1c; // Dark text for good contrast on the light gradient
+}
+
+// 🌊 Animación suave del fondo
+@keyframes fondoCeleste {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+// 📦 Estilo para tarjetas como el login
+mat-card.login-box {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  border: 1px solid #cfd8dc;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+// 💫 Animación de aparición
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 🖱️ Scroll personalizado (opcional)
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #e0f2f1; // Matches a light blue theme
+}
+::-webkit-scrollbar-thumb {
+  background-color: #4fc3f7; // A nice matching blue
+  border-radius: 6px;
+}
+
+/* Add any other global styles here */

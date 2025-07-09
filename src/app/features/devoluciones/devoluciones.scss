@@ -1,0 +1,21 @@
+/* Puedes añadir estilos específicos para el componente de devoluciones aquí */
+/* Por ejemplo, para el contenedor principal o los cards */
+
+.container {
+  max-width: 800px; // Limita el ancho para mejor lectura
+}
+
+.card {
+  border-radius: 0.5rem; // Bordes ligeramente redondeados
+  border: 1px solid #e0e0e0; // Un borde sutil
+}
+
+.card-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  border-top-left-radius: calc(0.5rem - 1px);
+  border-top-right-radius: calc(0.5rem - 1px);
+}
+
+.form-label {
+  font-weight: 500; // Un poco más de énfasis en las etiquetas
+}

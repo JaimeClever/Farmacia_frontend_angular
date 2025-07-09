@@ -1,0 +1,47 @@
+<mat-toolbar class="bg-primary text-white d-flex align-items-center px-3 shadow">
+  <button mat-icon-button (click)="toggleSidebar()" class="me-2 d-lg-none">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="fw-bold">🐾 Clínica Veterinaria</span>
+  <span class="flex-grow-1"></span>
+  <span *ngIf="usuario" class="d-none d-sm-block">Bienvenido, {{ usuario.nombres }}</span>
+</mat-toolbar>
+
+<mat-sidenav-container class="h-100">
+  <mat-sidenav #sidenav
+               [(opened)]="sidebarAbierto"
+               [mode]="esPantallaPequena ? 'over' : 'side'"
+               [fixedInViewport]="esPantallaPequena"
+               class="bg-light border-end"
+               [disableClose]="!esPantallaPequena">
+
+    <div class="p-3 d-flex flex-column gap-2">
+      <ng-container *ngIf="!esVendedor()">
+        <a class="btn btn-outline-primary text-start" routerLink="/productos" (click)="cerrarSidebar()">📅 Productos</a>
+        <a class="btn btn-outline-primary text-start" routerLink="/categorias" (click)="cerrarSidebar()">👤 Categorías</a>
+        <a class="btn btn-outline-primary text-start" routerLink="/devoluciones" (click)="cerrarSidebar()">🩺 Devoluciones</a>
+      </ng-container>
+
+      <a class="btn btn-outline-primary text-start" routerLink="/clientes" (click)="cerrarSidebar()">🐶 Clientes</a>
+      <a class="btn btn-outline-primary text-start" routerLink="/ventas" (click)="cerrarSidebar()">💵 Ventas</a>
+
+
+      <ng-container *ngIf="esAdmin()">
+        <hr />
+        <a class="btn btn-outline-secondary text-start" routerLink="/medicamentos" (click)="cerrarSidebar()">💊 Medicamentos</a>
+        <a class="btn btn-outline-secondary text-start" routerLink="/especialidades" (click)="cerrarSidebar()">🏥 Especialidades</a>
+        <a class="btn btn-outline-secondary text-start" routerLink="/veterinarios" (click)="cerrarSidebar()">🧑‍⚕️ Veterinarios</a>
+        <a class="btn btn-outline-secondary text-start" routerLink="/usuarios" (click)="cerrarSidebar()">📈 Agregar Usuarios</a>
+      </ng-container>
+
+      <hr />
+      <button mat-stroked-button color="warn" (click)="logout()" class="btn btn-danger">
+        Cerrar sesión
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="p-4 bg-light min-vh-100">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

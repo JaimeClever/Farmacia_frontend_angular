@@ -1,0 +1,35 @@
+mat-card.registro-box {
+  max-width: 450px; // Limit the width for a better appearance
+  width: 100%; // Ensure it takes full width up to max-width
+  padding: 2.5rem; // More internal padding for a spacious feel
+  box-sizing: border-box; // Include padding in the element's total width and height
+}
+
+// Ensure form fields take full width within mat-card
+.full-width {
+  width: 100%;
+}
+
+// Custom styles for form elements within the card
+mat-form-field {
+  margin-bottom: 1.5rem; // Add consistent spacing below form fields
+}
+
+// Adjust button styles if needed, though 'w-100' takes care of width
+button {
+  margin-top: 1rem; // Add space above the button
+}
+
+// Error message styling (reusing your existing class)
+.error-message {
+  font-size: 0.875rem; // Standard small text size for errors
+  // Bootstrap's text-danger will handle color, but you can override here
+}
+
+/* Responsive adjustments if the card gets too small on tiny screens */
+@media (max-width: 576px) {
+  mat-card.registro-box {
+    padding: 1.5rem; // Less padding on very small screens
+    margin: 0 1rem; // Add horizontal margin to prevent sticking to edges
+  }
+}

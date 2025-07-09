@@ -1,0 +1,151 @@
+// src/app/layout/layout.scss
+
+// Esta línea @use "sass:color"; DEBE ser la PRIMERA línea del archivo.
+@use "sass:color";
+
+/* Variables for consistency (Pharmacy Theme) */
+$primary-color: #3A86FF; // A clean, professional blue
+$secondary-color: #6c757d; // Muted grey for secondary elements
+$background-light: #F8F9FA; // Very light grey for a clean, bright background
+$border-color: #dee2e6; // Light grey for borders
+$shadow-color: rgba(0, 0, 0, 0.1); // Subtle shadow
+$text-dark: #1c1c1c; // Changed to match global body text color
+$danger-color: #dc3545; // Standard red for danger/warning
+
+// Optional: Define a specific 'health' or 'accent' green if you want to use it
+$health-green: #20C997; // A modern teal-green for specific accents
+
+/* Base Host Styling */
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  color: $text-dark;
+}
+
+/* --- Toolbar Styling --- */
+mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: $primary-color;
+  color: white;
+  padding: 0 1.5rem;
+  box-shadow: 0 2px 4px $shadow-color;
+
+  .mat-icon-button {
+    color: white;
+  }
+
+  .fw-bold {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .flex-grow-1 {
+    flex-grow: 1;
+  }
+
+  span {
+    font-size: 1rem;
+  }
+}
+
+/* --- Sidenav Container & Content --- */
+mat-sidenav-container {
+  flex: 1;
+  height: 100%;
+  background-color: $background-light;
+}
+
+mat-sidenav {
+  background-color: white;
+  border-right: 1px solid $border-color;
+  box-shadow: 2px 0 5px $shadow-color;
+
+  .p-3 {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  hr {
+    border-color: $border-color;
+    margin: 1rem 0;
+  }
+
+  /* Menu Button Styling */
+  a.btn {
+    text-transform: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &.btn-outline-primary {
+      color: $primary-color;
+      border-color: $primary-color;
+
+      &:hover {
+        background-color: $primary-color;
+        color: white;
+      }
+    }
+
+    &.btn-outline-secondary {
+      color: $secondary-color;
+      border-color: $secondary-color;
+
+      &:hover {
+        background-color: $secondary-color;
+        color: white;
+      }
+    }
+
+    mat-icon {
+      margin-right: 0.5rem;
+      font-size: 1.1rem;
+    }
+  }
+
+  /* Logout Button */
+  button.btn-danger {
+    font-weight: 600;
+    background-color: $danger-color;
+    color: white;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: color.adjust($danger-color, $lightness: -10%);
+    }
+  }
+}
+
+mat-sidenav-content {
+  background-color: $background-light;
+  padding: 2rem;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  mat-sidenav {
+    width: 280px;
+  }
+}
+
+@media (max-width: 576px) {
+  mat-toolbar {
+    padding: 0 1rem;
+  }
+
+  mat-sidenav-content {
+    padding: 1rem;
+  }
+}
